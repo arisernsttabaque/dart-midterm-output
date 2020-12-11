@@ -1,0 +1,75 @@
+import 'dart:io';
+import 'dart:math';
+
+
+String getPlayerMove(){
+print("What's your pick? \n");
+String selection = stdin.readLineSync().toLowerCase();
+
+
+switch (selection){
+  case "papel":
+    return "Papel 📃";
+    break;
+  case "gunting":
+    return "Gunting ✂️";
+    break;
+  case "bato":
+    return "Bato 👊";
+    break;
+  default:
+    return "Quit";
+    break;
+   }
+}
+String getBotMove() {
+  Random rand = new Random();
+  int move = rand.nextInt(3);
+
+  switch (move) {
+  case 0:
+    return "Papel 📃";
+    break;
+  case 1:
+    return "Gunting ✂️";
+    break;
+  case 2:
+    return "Bato 👊";
+    break;
+  default:
+    break;
+
+  }
+}
+
+String whoWon(String playerMove, String BotMove){
+  if (playerMove == BotMove) {
+    return "Draw! \nEnd the game? type (Quit) \n";
+  } else if (playerMove == "Bato" && BotMove == "Gunting"){
+    return "You Win! \nEnd the game? type (Quit) \n";
+  } else if (playerMove == "Gunting" && BotMove == "Papel"){
+    return "You Win! \nEnd the game? type (Quit) \n";
+  }else if (playerMove == "Papel" && BotMove == "Bato"){
+    return "You Win! \nEnd the game? type (Quit) \n";
+  } else {
+    return "Bot Wins! \nEnd the game? type (Quit) \n";
+  }
+}
+
+
+
+void main(){
+ while (true) {
+ print ("Papel, Gunting, Bato," );
+ String playerMove = getPlayerMove();
+
+ if (playerMove == "Quit") {
+  return;
+ }
+  print ("You played $playerMove");
+  String BotMove = getBotMove();
+  print("Bot played $BotMove");
+  print (whoWon(playerMove, BotMove));
+
+  }
+}
